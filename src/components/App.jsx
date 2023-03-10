@@ -1,4 +1,6 @@
-export const App = () => {
+import Feedback from './Feedback/Feedback'
+
+export const App = ({children}) => {
   return (
     <div
       style={{
@@ -10,7 +12,9 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+    
+      <Feedback />
+      {children}
     </div>
   );
 };
