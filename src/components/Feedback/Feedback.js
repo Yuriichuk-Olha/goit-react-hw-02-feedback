@@ -17,31 +17,30 @@ class Feedback extends Component {
     bad: this.props.initialBad,
   };
 
-  hendleGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-
-  // FeedbackOptions = ()=> {
+  // hendleGood = () => {
   //   this.setState(prevState => ({
-  //       good: prevState.good + 1,
-  //       neutral: prevState.neutral + 1,
-  //       bad: prevState.bad + 1,
+  //     good: prevState.good + 1,
+  //   }));
+  // };
 
-  //   })); 
-  //}
-  hendleNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
+  // hendleNeutral = () => {
+  //   this.setState(prevState => ({
+  //     neutral: prevState.neutral + 1,
+  //   }));
+  // };
 
-  hendleBad = () => {
+  // hendleBad = () => {
+  //   this.setState(prevState => ({
+  //     bad: prevState.bad + 1,
+  //   }));
+  // };
+
+    onLeaveFeedback = (event)=> {
+   
     this.setState(prevState => ({
-      bad: prevState.bad + 1,
+      [event]: prevState[event] + 1,  
     }));
-  };
+  }
 
   countTotalFeedback = () => {
     const total = this.state.good + this.state.neutral + this.state.bad;
@@ -64,34 +63,34 @@ class Feedback extends Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-    
+
     return (
-
-
       <div>
-        <Section title='Please leave feedback'>
-        <FeedbackOptions 
-        //options={this.FeedbackOptions()}
-        //onLeaveFeedback={this.FeedbackOptions()}
-    
-          onHendleGood={this.hendleGood}
-          onHendleNeutral={this.hendleNeutral}
-          onHendleBad={this.hendleBad}
-        />
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+          options={ Object.keys(this.state)}
+
+          onLeaveFeedback={this.onLeaveFeedback}
+            
+
+                // onHendleGood={this.hendleGood}
+                // onHendleNeutral={this.hendleNeutral}
+                // onHendleBad={this.hendleBad}
+          />
         </Section>
 
-        <Section title='Statistics'>
-        {this.countPositiveFeedbackPercentage() > 0 ? (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={this.countTotalFeedback()}
-            PositivePercentage={this.countPositiveFeedbackPercentage()}
-          />
-        ) : (
-          <Notification message="There is no feedback"></Notification>
-        )}
+        <Section title="Statistics">
+          {this.countPositiveFeedbackPercentage() > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              PositivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
         </Section>
       </div>
     );
@@ -99,6 +98,3 @@ class Feedback extends Component {
 }
 
 export default Feedback;
-
-
-
